@@ -1,0 +1,31 @@
+on:
+  push:
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 16.x
+          corepack: true
+
+      - run: pnpm i
+
+      - run: pnpm build
+
+  staging:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 16.x
+          corepack: true
+
+      - run: pnpm i
+
+      - run: pnpm build:staging
